@@ -38,8 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # Third Party
+    'django_countries',
+
     # Project Apss
     'users',
+    'rooms',
+    'core',
 ]
 
 MIDDLEWARE = [
