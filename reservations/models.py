@@ -1,6 +1,8 @@
 from django.conf import settings
 from django.db import models
 from rooms.models import Room
+from core.models import AbstractTimestamp
+
 
 STATUS = [
     ('pending', 'Pending'),
@@ -8,7 +10,7 @@ STATUS = [
     ('canceled', 'Canceled'),
 ]
 
-class Reservation(models.Model):
+class Reservation(AbstractTimestamp):
     status = models.CharField(choices=STATUS, max_length=12, default=STATUS[0])
     check_in = models.DateField()
     check_out = models.DateField()
