@@ -43,10 +43,15 @@ class RoomAdmin(admin.ModelAdmin):
     def count_ameneties(self, obj):
         return obj.ameneties.count()
 
+class RoomActions(admin.ModelAdmin):
+    list_display = ('name', 'used_by')
+
+    def used_by(self, obj):
+        return obj.rooms.count()
 
 admin.site.register(Room, RoomAdmin)
-admin.site.register(RoomType)
-admin.site.register(Amenity)
-admin.site.register(Facility)
-admin.site.register(HouseRule)
-admin.site.register(Photo)
+admin.site.register(RoomType, RoomActions)
+admin.site.register(Amenity, RoomActions)
+admin.site.register(Facility, RoomActions)
+admin.site.register(HouseRule, RoomActions)
+admin.site.register(Photo, RoomActions)
