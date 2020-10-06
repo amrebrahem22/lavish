@@ -35,6 +35,7 @@ class RoomAdmin(admin.ModelAdmin):
         'check_out',
         'instant_book',
         'count_ameneties',
+        'total_reviews',
     ]
 
     list_filter = ['name', 'city', 'price', 'country']
