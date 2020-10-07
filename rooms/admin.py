@@ -6,6 +6,7 @@ from .models import Room, RoomType, Amenity, Facility, HouseRule, Photo
 class PhotoInline(admin.TabularInline):
     model = Photo
 
+
 class RoomAdmin(admin.ModelAdmin):
 
     inlines = (PhotoInline,)
@@ -21,7 +22,7 @@ class RoomAdmin(admin.ModelAdmin):
             "fields": ('guests', 'beds', 'bedrooms', 'baths',)
         }),
         ('More about the Spaces', {
-            "fields": ('amenities', 'facilities', 'house_rule',)
+            "fields": ('amenities', 'facilities', 'house_rules',)
         }),
         ('Last Detail', {
             "fields": ('host',)
@@ -46,7 +47,7 @@ class RoomAdmin(admin.ModelAdmin):
     ]
 
     list_filter = ['name', 'city', 'price', 'country']
-    filter_horizontal = ('amenities', 'facilities', 'house_rule',)
+    filter_horizontal = ('amenities', 'facilities', 'house_rules',)
     search_fields = ('city', 'host__username')
     raw_id_fields = ('host',)
 
