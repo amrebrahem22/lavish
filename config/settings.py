@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     # Third Party
     'django_countries',
+    'django_seed',
 
     # Project Apss
     'users',
