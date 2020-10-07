@@ -74,6 +74,10 @@ class Room(AbstractTimestamp):
     def __str__(self):
         return self.name
 
+    def save(self, *args, **kwargs):
+        self.city = str.capitalize(self.city)
+        super().save(*args, **kwargs)
+
     def total_reviews(self):
         all_reviews = self.reviews.all()
         all_rating = 0
