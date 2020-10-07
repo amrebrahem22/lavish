@@ -57,7 +57,7 @@ class Room(AbstractTimestamp):
     city = models.CharField(max_length=80)
     price = models.IntegerField()
     address = models.CharField(max_length=140)
-    guestes = models.IntegerField()
+    guests = models.IntegerField()
     beds = models.IntegerField()
     bedrooms = models.IntegerField()
     baths = models.IntegerField()
@@ -81,7 +81,9 @@ class Room(AbstractTimestamp):
     def total_reviews(self):
         all_reviews = self.reviews.all()
         all_rating = 0
-        for review in all_reviews:
-            all_rating += review.rating_average()
-        return all_rating / len(all_reviews)
+        if len(all_reviews) > 0:
+            for review in all_reviews:
+                all_ratings += review.rating_average()
+            return all_ratings / len(all_reviews)
+        return 0
         

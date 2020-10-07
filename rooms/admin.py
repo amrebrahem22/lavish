@@ -12,13 +12,13 @@ class RoomAdmin(admin.ModelAdmin):
 
     fieldsets = [
         ('Basic Info', {
-            "fields": ('name', 'description', 'country', 'address', 'city', 'price')
+            "fields": ('name', 'description', 'country', 'address', 'city', 'price', 'room_type')
         }),
         ('Times', {
             "fields": ('check_in', 'check_out', 'instant_book')
         }),
         ('Spaces', {
-            "fields": ('guestes', 'beds', 'bedrooms', 'baths',)
+            "fields": ('guests', 'beds', 'bedrooms', 'baths',)
         }),
         ('More about the Spaces', {
             "fields": ('amenities', 'facilities', 'house_rule',)
@@ -51,7 +51,7 @@ class RoomAdmin(admin.ModelAdmin):
     raw_id_fields = ('host',)
 
     def count_ameneties(self, obj):
-        return obj.ameneties.count()
+        return obj.amenities.count()
 
     def count_photos(self, obj):
         return obj.photos.count()
