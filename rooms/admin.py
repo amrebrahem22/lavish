@@ -40,7 +40,7 @@ class RoomAdmin(admin.ModelAdmin):
         'check_in',
         'check_out',
         'instant_book',
-        'count_ameneties',
+        'count_amenities',
         'total_reviews',
         'count_photos',
     ]
@@ -50,8 +50,10 @@ class RoomAdmin(admin.ModelAdmin):
     search_fields = ('city', 'host__username')
     raw_id_fields = ('host',)
 
-    def count_ameneties(self, obj):
+    def count_amenities(self, obj):
         return obj.amenities.count()
+
+    count_amenities.short_description = "Amenity Count"
 
     def count_photos(self, obj):
         return obj.photos.count()
