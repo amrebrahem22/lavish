@@ -2,7 +2,7 @@ from django.core.management.base import BaseCommand
 from rooms.models import Amenity
 
 class Command(BaseCommand):
-    help = 'this command tells me I Love You'
+    help = 'this command to create Amenities'
 
     # to add argument
     def add_arguments(self, parser):
