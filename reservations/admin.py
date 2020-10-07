@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import Reservation
 
-admin.register(Reservation)
 class ReservationAdmin(admin.ModelAdmin):
-    list_display = ('room', 'status', 'check_in', ' check_out', 'guest', 'in_progress', 'is_finished')
+    list_display = ('room', 'status', 'guest', 'in_progress', 'is_finished')
 
+admin.site.register(Reservation, ReservationAdmin)

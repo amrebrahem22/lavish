@@ -32,3 +32,4 @@ class Reservation(AbstractTimestamp):
         return now > self.check_out
 
     is_finished.boolean = True
+    
