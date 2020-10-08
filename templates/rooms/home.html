@@ -3,19 +3,19 @@
 {% block title %} All Rooms {% endblock title %}
 
 {% block content %}
-{% if page %}
-    {% for room in page %}
+{% if rooms %}
+    {% for room in rooms %}
         <h3>{{ room.name }} | {{ room.city }} | ${{ room.price }}</h3>
         <p>{{ room.description }}</p>
     {% endfor %}
-    {% if page.has_previous %}
-        <a href="?page={{page.previous_page_number}}">Previous</a>
+    {% if page_obj.has_previous %}
+        <a href="?page={{page_obj.previous_page_number}}">Previous</a>
     {% endif %}
     <h5>
-        Page {{page.number}} of {{page.paginator.num_pages}}
+        Page {{page_obj.number}} of {{page_obj.paginator.num_pages}}
     </h5>
-    {% if page.has_next  %}
-        <a href="?page={{page.next_page_number}}">Next</a>
+    {% if page_obj.has_next  %}
+        <a href="?page={{page_obj.next_page_number}}">Next</a>
     {% endif %}
 {% else %}
     <h1>There's no Rooms to display...</h1>
