@@ -5,7 +5,7 @@
 {% block content %}
 {% if rooms %}
     {% for room in rooms %}
-        <h3>{{ room.name }} | {{ room.city }} | ${{ room.price }}</h3>
+        <h3><a href="{{ room.get_absolute_url }}">{{ room.name }} | {{ room.city }} | ${{ room.price }}</a></h3>
         <p>{{ room.description }}</p>
     {% endfor %}
     {% if page_obj.has_previous %}

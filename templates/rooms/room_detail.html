@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %} {{room.name}} {% endblock title %}
+
+{% block content %}
+{% if room %}
+<h3>{{ room.name }} | {{ room.city }} | ${{ room.price }}</h3>
+<p>{{ room.description }}</p>
+<h2>Host: {{ room.host.username }}</h2>
+<hr/>
+<h3>Amenities</h3>
+<ul>
+    {% for amenity in room.amenities.all %}
+        <li>{{ amenity }}</li>
+    {% endfor %}
+</ul>
+<h3>Facilities</h3>
+<ul>
+    {% for facility in room.facilities.all %}
+        <li>{{ facility }}</li>
+    {% endfor %}
+</ul>
+<h3>House Rules</h3>
+<ul>
+    {% for h in room.house_rules.all %}
+        <li>{{ h }}</li>
+    {% endfor %}
+</ul>
+{% else %}
+    <h1>There's no Room to display...</h1>
+{% endif %}
+{% endblock content %}
