@@ -46,7 +46,7 @@ class User(AbstractUser):
             send_mail(
                 "Verify Lavish Account",
                 strip_tags(html_message),
-                settings.EMAIL_FROM,
+                settings.DEFAULT_FROM_EMAIL,
                 [self.email],
                 fail_silently=False,
                 html_message=html_message,
