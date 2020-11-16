@@ -83,11 +83,11 @@ class Room(AbstractTimestamp):
     def save(self, *args, **kwargs):
         self.city = str.capitalize(self.city)
         super().save(*args, **kwargs)
-
+    
     def get_absolute_url(self):
-        return reverse('rooms:detail', kwargs={"pk": self.pk})
-
-    def total_reviews(self):
+        return reverse("rooms:detail", kwargs={"pk": self.pk})
+    
+    def total_rating(self):
         all_reviews = self.reviews.all()
         all_ratings = 0
         if len(all_reviews) > 0:
@@ -95,3 +95,20 @@ class Room(AbstractTimestamp):
                 all_ratings += review.rating_average()
             return round(all_ratings / len(all_reviews), 2)
         return 0
+    
+    def first_photo(self):
+        try:
+            photo, = self.photos.all()[:1]
+            return photo.file.url
+        except ValueError:
+            return None
+
+    def get_next_four_photos(self):
+        photos = self.photos.all()[1:5]
+        return photos
+
+    def get_beds(self):
+        if self.beds == 1:
+            return "1 bed"
+        else:
+            return f"{self.beds} beds"

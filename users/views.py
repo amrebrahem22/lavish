@@ -4,6 +4,7 @@ from django.shortcuts import redirect, reverse
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic import FormView, DetailView, UpdateView
 from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import PasswordChangeView
 from django.contrib.messages.views import SuccessMessageMixin
 from . import forms, models, mixins
@@ -70,7 +71,10 @@ class UserProfileView(DetailView):
     context_object_name = "user_obj"
 
 
-class UpdateProfileView(mixins.LoggedInOnlyView, SuccessMessageMixin, UpdateView):
+class UpdateProfileView(mixins.LoggedInOnlyView,
+                        mixins.EmailLoginOnlyView,
+                        SuccessMessageMixin,
+                        PasswordChangeView,):
 
     model = models.User
     template_name = "users/update-profile.html"
@@ -112,8 +116,10 @@ class UpdatePasswordView(
 
     def get_form(self, form_class=None):
         form = super().get_form(form_class=form_class)
-        form.fields["old_password"].widget.attrs = {"placeholder": "Current password"}
-        form.fields["new_password1"].widget.attrs = {"placeholder": "New password"}
+        form.fields["old_password"].widget.attrs = {
+            "placeholder": "Current password"}
+        form.fields["new_password1"].widget.attrs = {
+            "placeholder": "New password"}
         form.fields["new_password2"].widget.attrs = {
             "placeholder": "Confirm new password"
         }
@@ -121,3 +127,11 @@ class UpdatePasswordView(
 
     def get_success_url(self):
         return self.request.user.get_absolute_url()
+
+@login_required
+def switch_hosting(request):
+    try:
+        del request.session["is_hosting"]
+    except KeyError:
+        request.session["is_hosting"] = True
+    return redirect(reverse("core:home"))
